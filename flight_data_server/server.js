@@ -12,5 +12,3 @@ parseString(XMLFlightData, { mergeAttrs: true }, (err, result) => {
 
     flighDataJSON = JSON.stringify(result)
 })
-
-console.log(flighDataJSON)
