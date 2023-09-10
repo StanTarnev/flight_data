@@ -1,5 +1,16 @@
-const fs = require('fs')
+import { readFileSync } from 'fs'
+import { parseString } from 'xml2js'
 
-const XMLFlightData = fs.readFileSync('flighdata_A.xml')
+const XMLFlightData = readFileSync('flighdata_A.xml')
 
-console.log(XMLFlightData)
+let flighDataJSON = null
+
+parseString(XMLFlightData, { mergeAttrs: true }, (err, result) => {
+    if (err) {
+        throw err
+    }
+
+    flighDataJSON = JSON.stringify(result)
+})
+
+console.log(flighDataJSON)
