@@ -5,7 +5,11 @@ import cors from 'cors'
 
 let flightDataJSON = null
 const XMLFlightData = readFileSync('flighdata_A.xml')
-parseString(XMLFlightData, { mergeAttrs: false }, (err, result) => {
+parseString(XMLFlightData, {
+        mergeAttrs: true, 
+        explicitRoot: false,
+        explicitArray: false
+    }, (err, result) => {
     if (err) {
         throw err
     }
