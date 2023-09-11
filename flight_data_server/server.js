@@ -19,7 +19,7 @@ parseString(XMLFlightData, {
 const app = express()
 app.use(cors())
 
-app.get('/', (req, res) => {
+app.get('/flights', (req, res) => {
     res.json(flightDataJSON)
 })
 
