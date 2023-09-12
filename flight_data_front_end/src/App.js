@@ -21,6 +21,10 @@ export default function App() {
     return `${swedenDestinationRatio.toFixed(2)}%`
   }
 
+  function getTop10Airports() {
+
+  }
+
   return (
     <div className="App">
       <h1>Flight Data Stats</h1>
