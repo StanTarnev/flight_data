@@ -14,10 +14,7 @@ export default function App() {
     <div className="App">
       <h1>Flight Data Stats</h1>
       <div>
-        <h2>Number of Flight Departing in the Morning</h2>
-      </div>
-      <div>
-        <h2>Proportion of Flights to Sweden</h2>
+        <h2>Number of Flights Departing in the Morning</h2>
       </div>
       <div>
         <h2>Proportion of Flights to Sweden</h2>
