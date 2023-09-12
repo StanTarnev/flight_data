@@ -17,8 +17,8 @@ export default function App() {
   function getSwedenDestinationRatio() {
     const swedenIATAAirportCodes = ['AGH', 'AJR', 'ARN', 'BLE', 'BMA', 'EKT', 'EVG', 'GEV', 'GOT', 'GSE', 'GVX', 'HAD', 'HFS', 'HLF', 'HMV', 'HUV', 'IDB', 'JKG', 'KID', 'KLR', 'KRF', 'KRN', 'KSD', 'KSK', 'KVB', 'LDK', 'LLA', 'LPI', 'LYC', 'MMX', 'MXX', 'NRK', 'NYO', 'OER', 'ORB', 'OSD', 'OSK', 'PJA', 'RNB', 'SCR', 'SDL', 'SFT', 'SOO', 'SQO', 'THN', 'TYF', 'UME', 'VBY', 'VHM', 'VST', 'VVK', 'VXO']
 
-    const swedenDestinationRatio = flights.filter(flight => swedenIATAAirportCodes.includes(flight['destair'])).length / flights.length
-    return `${swedenDestinationRatio.toFixed(3)}%`
+    const swedenDestinationRatio = flights.filter(flight => swedenIATAAirportCodes.includes(flight['destair'])).length / flights.length * 100
+    return `${swedenDestinationRatio.toFixed(2)}%`
   }
 
   return (
