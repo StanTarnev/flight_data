@@ -22,7 +22,31 @@ export default function App() {
   }
 
   function getTop10Airports() {
-
+    const destinationFrequencies = []
+    for (const flight of flights) {
+        if (destinationFrequencies.length === 0) {
+            destinationFrequencies.push({
+                    "airportCode": flight["destair"],
+                    "count": 1
+            })
+        } else {
+            let existingAirportCode = false
+            for (const item of destinationFrequencies) {
+                if (item["airportCode"] === flight["destair"]) {
+                    item["count"]++
+                    existingAirportCode = true
+                    break
+                }
+            }
+            if (!existingAirportCode) {
+                destinationFrequencies.push({
+                    "airportCode": flight["destair"],
+                    "count": 1
+                })
+            }
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    }
+    return destinationFrequencies.sort((a, b) => b["count"] - a["count"]).slice(0, 10)
   }
 
   return (
@@ -37,7 +61,10 @@ export default function App() {
         <h3>{ getSwedenDestinationRatio() }</h3>
       </div>
       <div>
-        <h2>10 Most Popular Destination Airports</h2>
+        <h2>IATA Codes for the 10 Most Popular Destination Airports</h2>
+        <ul>
+          {getTop10Airports().map((airport, index) => <li key={index}>{ airport.airportCode } - { airport.count } flights</li>)}
+        </ul>
       </div>
       <div>
         <h2>Average Journey Time between London Heathrow and Dubai</h2>
