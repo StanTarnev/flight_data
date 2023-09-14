@@ -1,5 +1,6 @@
 import './App.css'
 import { useEffect, useState } from 'react'
+import parseMilliseconds from 'parse-ms'
 
 export default function App() {
   const [flights, setFlights] = useState([])
@@ -58,15 +59,15 @@ export default function App() {
                   "count": 1
           })
       } else {
-          let existingcurrency = false
+          let existingCurrency = false
           for (const item of currencyFrequencies) {
               if (item["currency"] === flight["originalcurrency"]) {
                   item["count"]++
-                  existingcurrency = true
+                  existingCurrency = true
                   break
               }
           }
-          if (!existingcurrency) {
+          if (!existingCurrency) {
               currencyFrequencies.push({
                   "currency": flight["originalcurrency"],
                   "count": 1
@@ -75,6 +76,24 @@ export default function App() {
       }
     }
     return currencyFrequencies.sort((a, b) => b["count"] - a["count"])
+  }
+
+  function getAveragePassengerJourney() {
+    const LHRDXBJourneys = flights.filter(flight => flight['depair'] === 'LHR' && flight['destair'] === 'DXB')
+
+    const journeyMillisecondDurations = LHRDXBJourneys.map(flight => {
+        const arrival = new Date(`${flight.inarrivaldate}T${flight.inarrivaltime}`)
+        const departure = new Date(`${flight.outdepartdate}T${flight.outdeparttime}`)
+        return arrival.getTime() - departure.getTime()
+    })
+
+    const averageMillisecondDuration = journeyMillisecondDurations.reduce((total, duration) => {
+      return total + duration
+    }, 0) / journeyMillisecondDurations.length
+
+    const parsedDuration = parseMilliseconds(averageMillisecondDuration)
+
+    return `${parsedDuration.days} days, ${parsedDuration.hours} hours and ${parsedDuration.minutes} minutes`
   }
 
   return (
@@ -95,7 +114,8 @@ export default function App() {
         </ul>
       </div>
       <div>
-        <h2>Average Journey Time between London Heathrow and Dubai</h2>
+        <h2>Duration of Average Passenger Journey between London Heathrow and Dubai</h2>
+        <h3>{ getAveragePassengerJourney() }</h3>
       </div>
       <div>
         <h2>Currencies Used to Buy Tickets</h2>
