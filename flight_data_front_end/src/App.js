@@ -24,29 +24,57 @@ export default function App() {
   function getTop10Airports() {
     const destinationFrequencies = []
     for (const flight of flights) {
-        if (destinationFrequencies.length === 0) {
-            destinationFrequencies.push({
-                    "airportCode": flight["destair"],
-                    "count": 1
-            })
-        } else {
-            let existingAirportCode = false
-            for (const item of destinationFrequencies) {
-                if (item["airportCode"] === flight["destair"]) {
-                    item["count"]++
-                    existingAirportCode = true
-                    break
-                }
-            }
-            if (!existingAirportCode) {
-                destinationFrequencies.push({
-                    "airportCode": flight["destair"],
-                    "count": 1
-                })
-            }
-        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+      if (destinationFrequencies.length === 0) {
+          destinationFrequencies.push({
+                  "airportCode": flight["destair"],
+                  "count": 1
+          })
+      } else {
+          let existingAirportCode = false
+          for (const item of destinationFrequencies) {
+              if (item["airportCode"] === flight["destair"]) {
+                  item["count"]++
+                  existingAirportCode = true
+                  break
+              }
+          }
+          if (!existingAirportCode) {
+              destinationFrequencies.push({
+                  "airportCode": flight["destair"],
+                  "count": 1
+              })
+          }
+      }
     }
     return destinationFrequencies.sort((a, b) => b["count"] - a["count"]).slice(0, 10)
+  }
+
+  function getCurrenciesUsed() {
+    const currencyFrequencies = []
+    for (const flight of flights) {
+      if (currencyFrequencies.length === 0) {
+          currencyFrequencies.push({
+                  "currency": flight["originalcurrency"],
+                  "count": 1
+          })
+      } else {
+          let existingcurrency = false
+          for (const item of currencyFrequencies) {
+              if (item["currency"] === flight["originalcurrency"]) {
+                  item["count"]++
+                  existingcurrency = true
+                  break
+              }
+          }
+          if (!existingcurrency) {
+              currencyFrequencies.push({
+                  "currency": flight["originalcurrency"],
+                  "count": 1
+              })
+          }
+      }
+    }
+    return currencyFrequencies.sort((a, b) => b["count"] - a["count"])
   }
 
   return (
@@ -68,6 +96,10 @@ export default function App() {
       </div>
       <div>
         <h2>Average Journey Time between London Heathrow and Dubai</h2>
+      </div>
+      <div>
+        <h2>Currencies Used to Buy Tickets</h2>
+        <ul>{ getCurrenciesUsed().map((currency, index) => <li key={index}>{ currency.currency } - { currency.count } flights</li>) }</ul>
       </div>
     </div>
   )
