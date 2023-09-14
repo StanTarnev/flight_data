@@ -1,9 +1,9 @@
 export default function MultiValueStat({title, stat}) {
     return (
         <div>
-          <h2>{ title }</h2>
+          <h2>{title}</h2>
           <ul>
-            { stat }
+            {stat}
           </ul>
         </div>
     )

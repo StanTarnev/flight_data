@@ -101,27 +101,31 @@ export default function App() {
   return (
     <div className="App">
       <h1>Flight Data Stats</h1>
-      <div>
-        <SingleValueStat
-          title='Number of Flights Departing in the Morning'
-          getStat={countMorningFlights}
-        />
-        <SingleValueStat
-          title='Proportion of Flights to Sweden'
-          getStat={getSwedenDestinationRatio}
-        />
-        <SingleValueStat
-          title='Duration of Average Passenger Journey between London Heathrow and Dubai'
-          getStat={getAveragePassengerJourney}
-        />
-        <MultiValueStat
-          title='IATA Codes for the 10 Most Popular Destination Airports'
-          stat={getTop10Airports().map((airport, index) => <li key={index}>{airport.airportCode} - {airport.count} flights</li>)}
-        />
-        <MultiValueStat
-          title='Currencies Used to Buy Tickets'
-          stat={getCurrenciesUsed().map((currency, index) => <li key={index}>{currency.currency} - {currency.count} flights</li>)}
-        />
+      <div id='stats'>
+        <div className='stat-types'>
+          <SingleValueStat
+            title='Number of Flights Departing in the Morning'
+            getStat={countMorningFlights}
+          />
+          <SingleValueStat
+            title='Proportion of Flights to Sweden'
+            getStat={getSwedenDestinationRatio}
+          />
+          <SingleValueStat
+            title='Duration of Average Passenger Journey between London Heathrow and Dubai'
+            getStat={getAveragePassengerJourney}
+          />
+        </div>
+        <div className='stat-types'>
+          <MultiValueStat
+            title='IATA Codes for the 10 Most Popular Destination Airports'
+            stat={getTop10Airports().map((airport, index) => <li key={index}>{airport.airportCode} - {airport.count} flights</li>)}
+          />
+          <MultiValueStat
+            title='Currencies Used to Buy Tickets'
+            stat={getCurrenciesUsed().map((currency, index) => <li key={index}>{currency.currency} - {currency.count} flights</li>)}
+          />
+        </div>
       </div>
     </div>
   )
