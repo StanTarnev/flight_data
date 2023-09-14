@@ -14,6 +14,6 @@ $ npm start
 $ npm start
 ```
 
-* In another browser tab, make sure to visit ```http://localhost:3000``` to see the front end use the flight data
+* In another browser tab, make sure to visit ```http://localhost:3000``` to see the front end use the JSON flight data
 
 
