@@ -1,6 +1,8 @@
 import './App.css'
 import { useEffect, useState } from 'react'
 import parseMilliseconds from 'parse-ms'
+import SingleValueStat from './components/SingleValueStat'
+import MultiValueStat from './components/MultiValueStat'
 
 export default function App() {
   const [flights, setFlights] = useState([])
@@ -100,26 +102,26 @@ export default function App() {
     <div className="App">
       <h1>Flight Data Stats</h1>
       <div>
-        <h2>Number of Flights Departing in the Morning</h2>
-        <h3>{ countMorningFlights() }</h3>
-      </div>
-      <div>
-        <h2>Proportion of Flights to Sweden</h2>
-        <h3>{ getSwedenDestinationRatio() }</h3>
-      </div>
-      <div>
-        <h2>IATA Codes for the 10 Most Popular Destination Airports</h2>
-        <ul>
-          {getTop10Airports().map((airport, index) => <li key={index}>{ airport.airportCode } - { airport.count } flights</li>)}
-        </ul>
-      </div>
-      <div>
-        <h2>Duration of Average Passenger Journey between London Heathrow and Dubai</h2>
-        <h3>{ getAveragePassengerJourney() }</h3>
-      </div>
-      <div>
-        <h2>Currencies Used to Buy Tickets</h2>
-        <ul>{ getCurrenciesUsed().map((currency, index) => <li key={index}>{ currency.currency } - { currency.count } flights</li>) }</ul>
+        <SingleValueStat
+          title='Number of Flights Departing in the Morning'
+          getStat={countMorningFlights}
+        />
+        <SingleValueStat
+          title='Proportion of Flights to Sweden'
+          getStat={getSwedenDestinationRatio}
+        />
+        <SingleValueStat
+          title='Duration of Average Passenger Journey between London Heathrow and Dubai'
+          getStat={getAveragePassengerJourney}
+        />
+        <MultiValueStat
+          title='IATA Codes for the 10 Most Popular Destination Airports'
+          stat={getTop10Airports().map((airport, index) => <li key={index}>{airport.airportCode} - {airport.count} flights</li>)}
+        />
+        <MultiValueStat
+          title='Currencies Used to Buy Tickets'
+          stat={getCurrenciesUsed().map((currency, index) => <li key={index}>{currency.currency} - {currency.count} flights</li>)}
+        />
       </div>
     </div>
   )
